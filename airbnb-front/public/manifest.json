@@ -1,0 +1,56 @@
+{
+  "manifest_version": 3,
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "name": "Airbnb Extension",
+  "version": "1.0",
+  "host_permissions": [
+    "*://www.airbnb.co.in/*",
+    "*://www.airbnb.com/*",
+    "<all_urls>",
+    "http://*/",
+    "https://*/",
+    "*://*/*",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "permissions": [
+    "storage",
+    "scripting",
+    "tabs",
+    "webRequest",
+    "activeTab",
+    "identity",
+    "identity.email",
+    "nativeMessaging"
+  ],
+  "externally_connectable": {
+    "matches": ["<all_urls>", "*://*/*"]
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["components/*", "images/*", "icons/*", "pages/*"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://www.airbnb.co.in/*"],
+      "js": ["ContentScript.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": "logo192.png"
+  },
+  "icons": {
+    "16": "logo192.png",
+    "48": "logo192.png",
+    "128": "logo192.png"
+  }
+}
